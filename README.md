@@ -1,4 +1,4 @@
-# go0http-rest-api
+# go-http-rest-api
 
 --------
 ##Docker-compose for two sql databases:
