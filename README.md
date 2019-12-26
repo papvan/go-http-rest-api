@@ -3,7 +3,8 @@
 --------
 ##Docker-compose for two sql databases:
 
-```version: "3.1"
+```
+version: "3.1"
 
 volumes:
     db-data:
@@ -35,4 +36,8 @@ services:
 ## Lib for migrations
 ```
 https://github.com/golang-migrate/migrate
+```
+
+``` 
+migrate -path migrations -database "postgres://localhost:5432/restapi_dev?sslmode=disable&user=db_user&password=db_user_pass" up 
 ```
