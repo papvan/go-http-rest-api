@@ -64,6 +64,7 @@ func (s *server) configureRouter() {
 	private.HandleFunc("/whoami", s.handleWhoami()).Methods("GET")
 }
 
+// Middleware to add "X-Request-ID" to context's header
 func (s *server) setRequestID(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		id := uuid.New().String()
@@ -75,6 +76,7 @@ func (s *server) setRequestID(next http.Handler) http.Handler {
 	})
 }
 
+// Middleware to output server info
 func (s *server) LogRequest(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		logger := s.logger.WithFields(logrus.Fields{
@@ -97,6 +99,7 @@ func (s *server) LogRequest(next http.Handler) http.Handler {
 	})
 }
 
+// Middleware for auth required routes
 func (s *server) authenticateUser(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		session, err := s.sessionStore.Get(r, sessionName)
